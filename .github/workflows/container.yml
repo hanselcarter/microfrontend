@@ -7,6 +7,9 @@ on:
             - "package/container/**"
         paths-ignore:
             - "README.md"
+defaults:
+    run:
+        working-directory: packages/container
 
 jobs:
     build:
