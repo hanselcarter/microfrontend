@@ -6,6 +6,10 @@ on:
         paths:
             - "package/container/**"
 
+defaults:
+    run:
+        working-directory: packages/container
+
 jobs:
     build:
         runs-on: ubuntu-22.04
