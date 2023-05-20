@@ -18,20 +18,8 @@ jobs:
               uses: actions/setup-node@v3
               with:
                   node-version: lts/gallium
-
-            - name: Set up scoped registries
-              run: |
-                  npm config set @fortawesome:registry=https://npm.fontawesome.com/
-                  npm config set //npm.fontawesome.com/:_authToken ${FONTAWESOME_TOKEN}
-                  npm config set @partnerhero:registry=https://npm.pkg.github.com
-                  npm config set //npm.pkg.github.com/:_authToken=${GH_TOKEN_CLASSIC}
-              env:
-                  FONTAWESOME_TOKEN: ${{ secrets.FONTAWESOME_TOKEN }}
-                  BIT_TOKEN: ${{ secrets.BIT_TOKEN }}
-                  GH_TOKEN_CLASSIC: ${{ secrets.GH_TOKEN_CLASSIC }}
-
             - name: Install dependencies
-              run: yarn ci
+              run: npm install
 
             - name: Build bundle
-              run: yarn build
+              run: npm run build
