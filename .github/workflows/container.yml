@@ -4,7 +4,7 @@ on:
     push:
         branches: [main, develop]
         paths:
-            - "package/container/**"
+            - "packages/container/**"
 
 defaults:
     run:
