@@ -5,8 +5,7 @@ on:
         branches: [main, develop]
         paths:
             - "package/container/**"
-        paths-ignore:
-            - "README.md"
+
 defaults:
     run:
         working-directory: packages/container
