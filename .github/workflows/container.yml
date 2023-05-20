@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: deploy container
 
 on:
     push:
@@ -7,34 +7,6 @@ on:
             - "README.md"
 
 jobs:
-    lint:
-        runs-on: ubuntu-22.04
-        name: Lint
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v3
-
-            - name: Setup node
-              uses: actions/setup-node@v3
-              with:
-                  node-version: lts/gallium
-
-            - name: Set up scoped registries
-              run: |
-                  npm config set @fortawesome:registry=https://npm.fontawesome.com/
-                  npm config set //npm.fontawesome.com/:_authToken ${FONTAWESOME_TOKEN}
-                  npm config set @partnerhero:registry=https://npm.pkg.github.com
-                  npm config set //npm.pkg.github.com/:_authToken=${GH_TOKEN_CLASSIC}
-              env:
-                  FONTAWESOME_TOKEN: ${{ secrets.FONTAWESOME_TOKEN }}
-                  BIT_TOKEN: ${{ secrets.BIT_TOKEN }}
-                  GH_TOKEN_CLASSIC: ${{ secrets.GH_TOKEN_CLASSIC }}
-
-            - name: Install dependencies
-              run: yarn ci
-
-            - name: Lint
-              run: yarn lint
     build:
         runs-on: ubuntu-22.04
         name: Build
@@ -63,31 +35,3 @@ jobs:
 
             - name: Build bundle
               run: yarn build
-    test:
-        runs-on: ubuntu-22.04
-        name: test
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v3
-
-            - name: Setup node
-              uses: actions/setup-node@v3
-              with:
-                  node-version: lts/gallium
-
-            - name: Set up scoped registries
-              run: |
-                  npm config set @fortawesome:registry=https://npm.fontawesome.com/
-                  npm config set //npm.fontawesome.com/:_authToken ${FONTAWESOME_TOKEN}
-                  npm config set @partnerhero:registry=https://npm.pkg.github.com
-                  npm config set //npm.pkg.github.com/:_authToken=${GH_TOKEN_CLASSIC}
-              env:
-                  FONTAWESOME_TOKEN: ${{ secrets.FONTAWESOME_TOKEN }}
-                  BIT_TOKEN: ${{ secrets.BIT_TOKEN }}
-                  GH_TOKEN_CLASSIC: ${{ secrets.GH_TOKEN_CLASSIC }}
-
-            - name: Install dependencies
-              run: yarn ci
-
-            - name: Test
-              run: yarn test:cov
