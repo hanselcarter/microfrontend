@@ -11,6 +11,8 @@ const prodConfig = {
     mode: "production",
     output: {
         filename: "[name].[contenthash].js",
+        //This public path is to append it to file name because on the s3 buck our build is under the path below
+        publicPath: "/marketing/latest/",
     },
     plugins: [
         new ModuleFederationPlugin({
