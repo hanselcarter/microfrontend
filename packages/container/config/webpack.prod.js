@@ -24,6 +24,7 @@ const prodConfig = {
                 //remember this name has to match up with the one declared o exposed on our marketing app
                 //remote will be located at the same domain of the other apps but lets assume we will locate it a /marketing subdomain
                 marketing: `marketing@${domain}/marketing/latest/remoteEntry.js`,
+                auth: `marketing@${auth}/marketing/latest/remoteEntry.js`,
             },
             //Big modules like react we should only load one copy, make sure both apps run the same version,
             //this can also be enforce by using singleton prop also this can be delegated to webpack but you might want very specific and use this manual way too
