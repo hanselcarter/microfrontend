@@ -5,6 +5,11 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link as RouterLink } from "react-router-dom";
+import { StylesProvider, createGenerateClassName } from "@material-ui/core";
+
+const generateClassName = createGenerateClassName({
+    productionPrefix: "test",
+});
 
 const useStyles = makeStyles((theme) => ({
     "@global": {
@@ -64,7 +69,7 @@ export default function Header({ isSignedIn, onSignOut }) {
     };
 
     return (
-        <React.Fragment>
+        <StylesProvider generateClassName={generateClassName}>
             <AppBar
                 position="static"
                 color="default"
@@ -93,6 +98,6 @@ export default function Header({ isSignedIn, onSignOut }) {
                     </Button>
                 </Toolbar>
             </AppBar>
-        </React.Fragment>
+        </StylesProvider>
     );
 }
