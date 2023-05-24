@@ -126,7 +126,7 @@ export default function Album() {
                                 <Card className={classes.card}>
                                     <CardMedia
                                         className={classes.cardMedia}
-                                        image="https://cdn.pixabay.com/photo/2023/05/14/05/04/seagull-7991991_640.jpg"
+                                        image="https://cdn.pixabay.com/photo/2023/05/19/05/33/boats-8003723_1280.jpg"
                                         title="Image title"
                                     />
                                     <CardContent
