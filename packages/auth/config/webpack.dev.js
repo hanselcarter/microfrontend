@@ -10,19 +10,19 @@ const devConfig = {
     mode: "development",
     output: {
         //This need to be set on every sub project on dev mode to know where the main js file is located
-        publicPath: "http://localhost:8081/",
+        publicPath: "http://localhost:8082/",
     },
     devServer: {
-        port: 8081,
+        port: 8082,
         historyApiFallback: true,
     },
     plugins: [
         new ModuleFederationPlugin({
             //Global to use inside container/consumer/shell
-            name: "marketing",
+            name: "auth",
             filename: "remoteEntry.js",
             exposes: {
-                "./MarketingApp": "./src/bootstrap",
+                "./AuthApp": "./src/bootstrap",
             },
             shared: packageJson.dependencies,
         }),

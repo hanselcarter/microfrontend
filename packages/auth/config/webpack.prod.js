@@ -4,25 +4,23 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const commonConfig = require("./webpack.common");
 
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+
 const packageJson = require("../package.json");
 
-const devConfig = {
-    mode: "development",
+const prodConfig = {
+    mode: "production",
     output: {
-        //This need to be set on every sub project on dev mode to know where the main js file is located
-        publicPath: "http://localhost:8081/",
-    },
-    devServer: {
-        port: 8081,
-        historyApiFallback: true,
+        filename: "[name].[contenthash].js",
+        //This public path is to append it to file name because on the s3 buck our build is under the path below
+        publicPath: "/auth/latest/",
     },
     plugins: [
         new ModuleFederationPlugin({
             //Global to use inside container/consumer/shell
-            name: "marketing",
+            name: "auth",
             filename: "remoteEntry.js",
             exposes: {
-                "./MarketingApp": "./src/bootstrap",
+                "./AuthApp": "./src/bootstrap",
             },
             shared: packageJson.dependencies,
         }),
@@ -32,4 +30,4 @@ const devConfig = {
     ],
 };
 
-module.exports = merge(commonConfig, devConfig);
+module.exports = merge(commonConfig, prodConfig);
