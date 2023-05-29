@@ -5,14 +5,18 @@ import { createMemoryHistory, createBrowserHistory } from "history";
 
 //Mount function to start up the app
 
-const mount = (el, { onNavigate, defaultHistory }) => {
+const mount = (el, { onNavigate, defaultHistory, user }) => {
     const history = defaultHistory || createMemoryHistory();
 
     if (onNavigate) {
         history.listen(onNavigate);
     }
 
-    ReactDOM.render(<App history={history} />, el);
+    if (user) {
+        console.log(user, "user");
+    }
+
+    ReactDOM.render(<App history={history} user={user} />, el);
 
     return {
         onParentNavigate({ pathname: nextPathname }) {

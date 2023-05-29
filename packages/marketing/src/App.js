@@ -12,7 +12,15 @@ const generateClassName = createGenerateClassName({
     productionPrefix: "ma",
 });
 
-export default ({ history }) => {
+export default ({ history, user }) => {
+    React.useEffect(() => {
+        const fetchData = async () => {
+            await user();
+        };
+
+        fetchData();
+    }, [user]);
+
     return (
         <div>
             <StylesProvider generateClassName={generateClassName}>

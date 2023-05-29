@@ -1,10 +1,15 @@
 import React, { useRef, useEffect } from "react";
 import { mount } from "marketing/MarketingApp";
 import { useHistory } from "react-router-dom";
+import { useUser } from "./useUser";
 
 export default () => {
     const ref = useRef(null);
     const history = useHistory();
+
+    const { getUser, id } = useUser();
+
+    console.log(getUser, id, "getUser");
 
     useEffect(() => {
         const { onParentNavigate } = mount(ref.current, {
@@ -16,6 +21,7 @@ export default () => {
                     history.push(nextPathname);
                 }
             },
+            user: getUser,
         });
 
         history.listen(onParentNavigate);
